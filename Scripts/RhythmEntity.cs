@@ -10,11 +10,11 @@ namespace CM.Rhythm
 
 		public float Duration { get; internal set; }
 
-		protected T audio { get; }
+		protected T Audio { get; }
 
 		public RhythmEntity(T audio)
 		{
-			this.audio = audio;
+			Audio = audio;
 
 			ResetDuration();
 		}
