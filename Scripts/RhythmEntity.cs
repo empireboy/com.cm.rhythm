@@ -3,27 +3,53 @@ using System;
 
 namespace CM.Rhythm
 {
+	/// <summary>
+	/// Represents the base of an audio player.
+	/// </summary>
+	/// <typeparam name="T">The Type used to play and stop audio.</typeparam>
 	public abstract class RhythmEntity<T>
 	{
+		/// <summary>
+		/// The current time in seconds of the audio.
+		/// </summary>
 		public abstract float Time { get; }
+
+		/// <summary>
+		/// The total time in seconds of the audio.
+		/// </summary>
 		public abstract float TotalTime { get; }
+
+		/// <summary>
+		/// True if the audio is playing.
+		/// </summary>
 		public abstract bool IsPlaying { get; }
 
 		protected T Audio { get; }
 
 		private Timer _durationTimer = null;
 
+		/// <summary>
+		/// Constructor of the RhythmEntity.
+		/// </summary>
+		/// <param name="audio">The Type used to play and stop audio.</param>
 		public RhythmEntity(T audio)
 		{
 			Audio = audio;
 		}
 
+		/// <summary>
+		/// Plays the audio from the beginning.
+		/// </summary>
 		public void Play()
 		{
 			StopDurationTimer();
 			OnPlay();
 		}
 
+		/// <summary>
+		/// Plays the audio at a specific time.
+		/// </summary>
+		/// <param name="time">Time to play the audio at in seconds.</param>
 		public void PlayAt(float time)
 		{
 			TimeExceptions(time);
@@ -31,6 +57,11 @@ namespace CM.Rhythm
 			OnPlayAt(time);
 		}
 
+		/// <summary>
+		/// Plays the audio at a specific time for a specific duration.
+		/// </summary>
+		/// <param name="time">Time to play the audio at in seconds.</param>
+		/// <param name="duration">The duration to play the audio for in seconds.</param>
 		public void PlayAt(float time, float duration)
 		{
 			TimeExceptions(time);
@@ -50,6 +81,9 @@ namespace CM.Rhythm
 			OnPlayAt(time);
 		}
 
+		/// <summary>
+		/// Stops the audio.
+		/// </summary>
 		public void Stop()
 		{
 			StopDurationTimer();
