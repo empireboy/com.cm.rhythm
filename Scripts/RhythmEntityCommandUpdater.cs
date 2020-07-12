@@ -40,13 +40,6 @@
 				BeatCommands[BeatCommandIndex].Execute();
 				BeatCommandIndex++;
 			}
-
-			OnUpdate();
-		}
-
-		protected virtual void OnUpdate()
-		{
-
 		}
 	}
 }
