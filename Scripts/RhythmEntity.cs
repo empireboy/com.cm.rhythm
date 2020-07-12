@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CM.Timing;
+using System;
 
 namespace CM.Rhythm
 {
@@ -8,27 +9,25 @@ namespace CM.Rhythm
 		public abstract float TotalTime { get; }
 		public abstract bool IsPlaying { get; }
 
-		public float Duration { get; internal set; }
-
 		protected T Audio { get; }
+
+		private Timer _durationTimer = null;
 
 		public RhythmEntity(T audio)
 		{
 			Audio = audio;
-
-			ResetDuration();
 		}
 
 		public void Play()
 		{
-			ResetDuration();
+			StopDurationTimer();
 			OnPlay();
 		}
 
 		public void PlayAt(float time)
 		{
 			TimeExceptions(time);
-			ResetDuration();
+			StopDurationTimer();
 			OnPlayAt(time);
 		}
 
@@ -37,14 +36,23 @@ namespace CM.Rhythm
 			TimeExceptions(time);
 			DurationExceptions(duration);
 
-			Duration = duration;
+			// Create a new Timer if it doesn't exist.
+			if (_durationTimer == null)
+			{
+				_durationTimer = new Timer();
+				_durationTimer.OnFinish += OnDurationTimerFinish;
+			}
+
+			_durationTimer.TotalTime = duration;
+			_durationTimer.Reset();
+			_durationTimer.Start();
 
 			OnPlayAt(time);
 		}
 
 		public void Stop()
 		{
-			ResetDuration();
+			StopDurationTimer();
 			OnStop();
 		}
 
@@ -52,11 +60,20 @@ namespace CM.Rhythm
 		protected abstract void OnPlayAt(float time);
 		protected abstract void OnStop();
 
-		private void ResetDuration()
+		private void StopDurationTimer()
 		{
-			Duration = 0;
+			if (_durationTimer == null)
+				return;
+
+			_durationTimer.Stop();
 		}
-		
+
+		private void OnDurationTimerFinish()
+		{
+			_durationTimer = null;
+			Stop();
+		}
+
 		private void TimeExceptions(float time)
 		{
 			if (time < 0)
