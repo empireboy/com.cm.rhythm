@@ -6,8 +6,7 @@ namespace CM.Rhythm
 	/// <summary>
 	/// Represents the base of an audio player.
 	/// </summary>
-	/// <typeparam name="T">The Type used to play and stop audio.</typeparam>
-	public abstract class RhythmEntity<T>
+	public abstract class RhythmEntity
 	{
 		/// <summary>
 		/// The current time in seconds of the audio.
@@ -24,18 +23,7 @@ namespace CM.Rhythm
 		/// </summary>
 		public abstract bool IsPlaying { get; }
 
-		protected T Audio { get; }
-
 		private Timer _durationTimer = null;
-
-		/// <summary>
-		/// Constructor of the RhythmEntity.
-		/// </summary>
-		/// <param name="audio">The Type used to play and stop audio.</param>
-		public RhythmEntity(T audio)
-		{
-			Audio = audio;
-		}
 
 		/// <summary>
 		/// Plays the audio from the beginning.
