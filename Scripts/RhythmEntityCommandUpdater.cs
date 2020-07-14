@@ -3,10 +3,9 @@
 	/// <summary>
 	/// Executes all BeatCommand classes at corresponding times.
 	/// </summary>
-	/// <typeparam name="T">The Type used to play and stop audio.</typeparam>
-	public class RhythmEntityCommandUpdater<T>
+	public class RhythmEntityCommandUpdater
 	{
-		protected RhythmEntity<T> Entity { get; }
+		protected RhythmEntity Entity { get; }
 		protected BeatCommand[] BeatCommands { get; }
 		protected int BeatCommandIndex { get; private set; }
 
@@ -16,7 +15,7 @@
 		/// </summary>
 		/// <param name="entity">The RhythmEntity that this updater uses.</param>
 		/// <param name="beatCommands">The BeatCommand classes that need to be executed when the audio from RhythmEntity is playing.</param>
-		public RhythmEntityCommandUpdater(RhythmEntity<T> entity, BeatCommand[] beatCommands)
+		public RhythmEntityCommandUpdater(RhythmEntity entity, BeatCommand[] beatCommands)
 		{
 			Entity = entity;
 			BeatCommands = beatCommands;
