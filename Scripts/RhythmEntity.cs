@@ -1,50 +1,80 @@
-﻿using System;
+﻿using CM.Timing;
+using System;
 
 namespace CM.Rhythm
 {
-	public abstract class RhythmEntity<T>
+	/// <summary>
+	/// Represents the base of an audio player.
+	/// </summary>
+	public abstract class RhythmEntity
 	{
+		/// <summary>
+		/// The current time in seconds of the audio.
+		/// </summary>
 		public abstract float Time { get; }
+
+		/// <summary>
+		/// The total time in seconds of the audio.
+		/// </summary>
 		public abstract float TotalTime { get; }
+
+		/// <summary>
+		/// True if the audio is playing.
+		/// </summary>
 		public abstract bool IsPlaying { get; }
 
-		public float Duration { get; internal set; }
+		private Timer _durationTimer = null;
 
-		protected T Audio { get; }
-
-		public RhythmEntity(T audio)
-		{
-			Audio = audio;
-
-			ResetDuration();
-		}
-
+		/// <summary>
+		/// Plays the audio from the beginning.
+		/// </summary>
 		public void Play()
 		{
-			ResetDuration();
+			StopDurationTimer();
 			OnPlay();
 		}
 
+		/// <summary>
+		/// Plays the audio at a specific time.
+		/// </summary>
+		/// <param name="time">Time to play the audio at in seconds.</param>
 		public void PlayAt(float time)
 		{
 			TimeExceptions(time);
-			ResetDuration();
+			StopDurationTimer();
 			OnPlayAt(time);
 		}
 
+		/// <summary>
+		/// Plays the audio at a specific time for a specific duration.
+		/// </summary>
+		/// <param name="time">Time to play the audio at in seconds.</param>
+		/// <param name="duration">The duration to play the audio for in seconds.</param>
 		public void PlayAt(float time, float duration)
 		{
 			TimeExceptions(time);
 			DurationExceptions(duration);
 
-			Duration = duration;
+			// Create a new Timer if it doesn't exist.
+			if (_durationTimer == null)
+			{
+				_durationTimer = new Timer();
+				_durationTimer.OnFinish += OnDurationTimerFinish;
+			}
+
+			_durationTimer.TotalTime = duration;
+			_durationTimer.Reset();
+			_durationTimer.Start();
 
 			OnPlayAt(time);
 		}
 
+		/// <summary>
+		/// Stops the audio.
+		/// </summary>
 		public void Stop()
 		{
-			ResetDuration();
+			StopDurationTimer();
 			OnStop();
 		}
 
@@ -52,11 +82,20 @@ namespace CM.Rhythm
 		protected abstract void OnPlayAt(float time);
 		protected abstract void OnStop();
 
-		private void ResetDuration()
+		private void StopDurationTimer()
 		{
-			Duration = 0;
+			if (_durationTimer == null)
+				return;
+
+			_durationTimer.Stop();
 		}
-		
+
+		private void OnDurationTimerFinish()
+		{
+			_durationTimer = null;
+			Stop();
+		}
+
 		private void TimeExceptions(float time)
 		{
 			if (time < 0)
