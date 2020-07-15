@@ -1,4 +1,4 @@
-# CM Rhythm V0.1.0
+# CM Rhythm V0.2.0
 
 CM Rhythm is a platform independent package for music applications that use a rhythm mechanic.
 
@@ -19,3 +19,10 @@ This package is still in development. The current version of this package is not
 `
 https://github.com/empireboy/com.cm.rhythm.git
 `
+
+## Dependencies
+
+* [com.cm.designpatterns](https://github.com/empireboy/com.cm.designpatterns)
+* [com.cm.timing](https://github.com/empireboy/com.cm.timing.git)
+* [com.cm.timing.unity](https://github.com/empireboy/com.cm.timing.unity.git)
+* [com.cm.events](https://github.com/empireboy/com.cm.events.git)
