@@ -1,4 +1,4 @@
-# CM Rhythm V0.2.0
+# CM Rhythm v0.2.0
 
 CM Rhythm is a platform independent package for music applications that use a rhythm mechanic.
 
