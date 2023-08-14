@@ -1,7 +1,7 @@
 {
     "name": "com.cm.rhythm",
     "displayName": "CM Rhythm",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "unity": "2019.3",
     "author": "Casper Meloen",
     "description": "CM Rhythm is a platform independent package for music applications that use a rhythm mechanic.",

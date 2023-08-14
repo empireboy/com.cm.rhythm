@@ -59,7 +59,7 @@ namespace CM.Rhythm
 			if (_durationTimer == null)
 			{
 				_durationTimer = new Timer();
-				_durationTimer.OnFinish += OnDurationTimerFinish;
+				_durationTimer.OnFinished += OnDurationTimerFinish;
 			}
 
 			_durationTimer.TotalTime = duration;
