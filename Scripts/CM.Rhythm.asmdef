@@ -1,10 +1,11 @@
 {
     "name": "CM.Rhythm",
+    "rootNamespace": "",
     "references": [
         "GUID:355a8e16ae996114995d49fd318b499c",
         "GUID:fcb10ab58de700b44894f3a33ab324d8",
         "GUID:e4f3a8538a954be4791d39fd01278acd",
-        "GUID:54870d9dc05140743a17ef9fb7e188bb"
+        "GUID:7b391c215d528ce4a8ce9461957366fb"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
