@@ -1,15 +1,15 @@
 {
     "name": "com.cm.rhythm",
     "displayName": "CM Rhythm",
-    "version": "0.2.1",
-    "unity": "2019.3",
+    "version": "0.2.2",
+    "unity": "2021.2",
     "author": "Casper Meloen",
     "description": "CM Rhythm is a platform independent package for music applications that use a rhythm mechanic.",
     "dependencies": {
         "com.cm.designpatterns": "https://github.com/empireboy/com.cm.designpatterns.git",
         "com.cm.timing": "https://github.com/empireboy/com.cm.timing.git",
         "com.cm.timing.unity": "https://github.com/empireboy/com.cm.timing.unity.git",
-        "com.cm.events": "https://github.com/empireboy/com.cm.events.git"
+        "com.cm.utility": "https://github.com/empireboy/com.cm.utility.git"
     },
     "repository": {
         "type": "git",
